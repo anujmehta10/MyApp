@@ -1,5 +1,25 @@
-<?php include('header.php'); ?>
-	<?php include('sidebar.php'); ?>	
+<?php include('header.php'); 
+	 include('sidebar.php'); 
+	 include('config1.php');
+	
+	
+	if(isset($_POST['submit']))
+	{
+		$name = isset($_POST['name']) ? ($_POST['name']) : '';
+		$price = isset($_POST['price']) ? ($_POST['price']) : '';
+		$image = isset($_POST['image']) ? ($_POST['image']) : '';
+		$category = isset($_POST['category']) ? ($_POST['category']) : '';
+		$tags = isset($_POST['tags']) ? ($_POST['tags']) : '';
+		$description = isset($_POST['description']) ? ($_POST['description']) : '';
+	
+	$insert = "INSERT INTO products(`name`, `price`, `image`,`category`,`tags`,`description`)
+	VALUES('$name', '$price', '$image',  '$category','$tags','$description')";
+		mysqli_query($conn, $insert);
+	
+	}
+	
+	
+	?>
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			
 			<noscript> <!-- Show a notification if the user has disabled javascript -->
@@ -48,11 +68,13 @@
 							<thead>
 								<tr>
 								   <th><input class="check-all" type="checkbox" /></th>
-								   <th>Column 1</th>
-								   <th>Column 2</th>
-								   <th>Column 3</th>
-								   <th>Column 4</th>
-								   <th>Column 5</th>
+								   <th>Name</th>
+								   <th>Price</th>
+								   <th>Image</th>
+								   <th>Category</th>
+								   <th>Tags</th>
+								   <th>Description</th>
+								   <th>Action</th>
 								</tr>
 								
 							</thead>
@@ -97,103 +119,28 @@
 									</td>
 								</tr>
 								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
+								<?php
+									$query = mysqli_query($conn, "SELECT * FROM products");
+
+									while($row = mysqli_fetch_array($query))
+									{
+										echo"<tr>";
+											echo'<td> <input type="checkbox" /></td>';
+											echo "<td>" . $row['name'] ."</td>";
+											echo "<td>" . $row['price'] ."</td>";
+											echo "<td>" . $row['image'] ."</td>";
+											echo "<td>" . $row['category'] ."</td>";
+											echo "<td>" . $row['tags'] ."</td>";
+											echo "<td>" . $row['description'] ."</td>";
+											echo "<td>";
+												echo "<a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>";
+												echo "<a href='#' title='Delete'><img src='resources/images/icons/cross.png' alt='Delete'/></a>";
+												echo "<a href='#' title='Edit Meta'><img src='resources/images/icons/hammer_screwdriver.png' alt='Edit Meta' /></a>";
+											echo "</td>";
+										echo"</tr>";
+									}
+								?>
 								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
 							</tbody>
 							
 						</table>
@@ -202,56 +149,50 @@
 					
 					<div class="tab-content" id="tab2">
 					
-						<form action="#" method="post">
+						<form action="products.php" method="post">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
-								<p>
-									<label>Small form input</label>
-										<input class="text-input small-input" type="text" id="small-input" name="small-input" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+								<!DOCTYPE html>
+							<html>
+							<body>
+							<h2>Products</h2>
+							
+							<form>
+							<label for="name">Name:</label><br>
+							<input type="text" id="name" name="name"><br>
+							<label for="price">Price:</label><br>
+							<input type="text" id="price" name="price"><br>
+							<label for="img">Select image:</label><br>
+							<input type="file" id="image" name="image" accept="image"><br>
+							<label for="category">Category:</label><br>
+							<select name="category" id="category">
+							<option value=""></option>
+							<option value="Men">Men</option>
+							<option value="Women">Women</option>
+							<option value="Kids">Kids</option>
+							</select><br>
+							<label for="tags">Tags:</label><br>
+							<input type="checkbox" id="fashion" name="fashion" value="">
+							<label for="fashion"> fashion</label>
+							<input type="checkbox" id="Ecommerce" name="Ecommerce" value="">
+							<label for="Ecommerce">Ecommerce</label>
+							<input type="checkbox" id="Shop" name="Shop" value="">
+							<label for="Shop">Shop</label>
+							<input type="checkbox" id="HandBag" name="HandBag" value="">
+							<label for="HandBag">HandBag</label>
+							<input type="checkbox" id="Laptop" name="Laptop" value="">
+							<label for="Laptop">Laptop</label>
+							<input type="checkbox" id="Headphones" name="Headphones" value="">
+							<label for="Headphones">Headphones</label><br>
+							<label for="text">Description:</label><br>
+							<textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+							<p>
+									<input class="button" type="submit" name="submit" value="submit" />
 								</p>
-								
-								<p>
-									<label>Medium form input</label>
-									<input class="text-input medium-input datepicker" type="text" id="medium-input" name="medium-input" /> <span class="input-notification error png_bg">Error message</span>
-								</p>
-								
-								<p>
-									<label>Large form input</label>
-									<input class="text-input large-input" type="text" id="large-input" name="large-input" />
-								</p>
-								
-								<p>
-									<label>Checkboxes</label>
-									<input type="checkbox" name="checkbox1" /> This is a checkbox <input type="checkbox" name="checkbox2" /> And this is another checkbox
-								</p>
-								
-								<p>
-									<label>Radio buttons</label>
-									<input type="radio" name="radio1" /> This is a radio button<br />
-									<input type="radio" name="radio2" /> This is another radio button
-								</p>
-								
-								<p>
-									<label>This is a drop down list</label>              
-									<select name="dropdown" class="small-input">
-										<option value="option1">Option 1</option>
-										<option value="option2">Option 2</option>
-										<option value="option3">Option 3</option>
-										<option value="option4">Option 4</option>
-									</select> 
-								</p>
-								
-								<p>
-									<label>Textarea with WYSIWYG</label>
-									<textarea class="text-input textarea wysiwyg" id="textarea" name="textfield" cols="79" rows="15"></textarea>
-								</p>
-								
-								<p>
-									<input class="button" type="submit" value="Submit" />
-								</p>
-								
+							</body>
+							</html>
+															
 							</fieldset>
 							
 							<div class="clear"></div><!-- End .clear -->
